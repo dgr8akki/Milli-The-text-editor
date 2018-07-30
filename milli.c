@@ -21,6 +21,11 @@ enum editorKey
   DEL_KEY
 };
 
+typedef struct erow {
+  int size;
+  char *chars;
+} erow;
+
 /*** append buffer ***/
 struct abuf
 {
@@ -57,6 +62,8 @@ struct editorConfig
   int cx, cy;
   int screenrows;
   int screencols;
+  int numrows;
+  erow row;
   struct termios orig_termios;
 };
 struct editorConfig E;
@@ -166,6 +173,7 @@ void initEditor()
 {
   E.cx = 0;
   E.cy = 0;
+  E.numrows = 0;
   if (getWindowSize(&E.screenrows, &E.screencols) == -1)
     die("getWindowSize");
 }
