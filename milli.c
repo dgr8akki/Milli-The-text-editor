@@ -13,6 +13,9 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
+void die(const char *s);
+void editorMoveCursor(int key);
+int getCursorPosition(int *rows, int *cols);
 
 enum editorKey
 {
@@ -86,7 +89,8 @@ int getWindowSize(int *rows, int *cols)
     {
       return -1;
     }
-    return getCursorPosition(rows, cols);
+    int res = getCursorPosition(rows, cols);
+    return res;
   }
   else
   {
